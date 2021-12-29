@@ -1,0 +1,7 @@
+#!/usr/bin/env php
+<?php
+
+$env = parse_ini_file('./.env', true);
+
+
+
