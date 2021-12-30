@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
+use support\Env;
 use Workerman\Worker;
 use Workerman\Protocols\Http;
 use Workerman\Connection\TcpConnection;
@@ -8,7 +9,6 @@ use Webman\App;
 use Webman\Config;
 use Webman\Route;
 use Webman\Middleware;
-use Dotenv\Dotenv;
 use support\Request;
 use support\Log;
 use support\Container;
@@ -17,15 +17,7 @@ ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 
 if (file_exists(base_path().'/.env')) {
-    \support\Env::load(base_path().'/.env');
-}
-
-if (class_exists('Dotenv\Dotenv') && file_exists(base_path().'/.env')) {
-    if (method_exists('Dotenv\Dotenv', 'createUnsafeImmutable')) {
-        Dotenv::createUnsafeImmutable(base_path())->load();
-    } else {
-        Dotenv::createMutable(base_path())->load();
-    }
+    Env::load(base_path().'/.env');
 }
 
 Config::load(config_path(), ['route', 'container']);

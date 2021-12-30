@@ -25,7 +25,14 @@
   },
   "require": {
     "php": ">=7.2",
-    "workerman/webman-framework": "^1.0"
+    "workerman/webman-framework": "^1.0",
+    "monolog/monolog": "^2.0",
+    "nsp-team/validator-tool": "^0.0.1",
+    "ext-json": "*",
+    "illuminate/redis": "^8.2.0",
+    "illuminate/database": "^8.0",
+    "qiniu/php-sdk": "^7.4",
+    "illuminate/events": "^8.77"
   },
   "suggest": {
     "ext-event": "For better performance. "

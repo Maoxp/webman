@@ -19,45 +19,40 @@ use Webman\App;
 use Webman\Config;
 use Webman\Route;
 
-define('BASE_PATH', realpath(__DIR__ . '/../'));
+define('BASE_PATH', dirname(__DIR__) . '/');
 
 /**
  * @return string
  */
-function base_path()
-{
+function base_path(): string {
     return BASE_PATH;
 }
 
 /**
  * @return string
  */
-function app_path()
-{
+function app_path() {
     return BASE_PATH . DIRECTORY_SEPARATOR . 'app';
 }
 
 /**
  * @return string
  */
-function public_path()
-{
+function public_path() {
     return BASE_PATH . DIRECTORY_SEPARATOR . 'public';
 }
 
 /**
  * @return string
  */
-function config_path()
-{
+function config_path() {
     return BASE_PATH . DIRECTORY_SEPARATOR . 'config';
 }
 
 /**
  * @return string
  */
-function runtime_path()
-{
+function runtime_path() {
     return BASE_PATH . DIRECTORY_SEPARATOR . 'runtime';
 }
 
@@ -67,8 +62,7 @@ function runtime_path()
  * @param string $body
  * @return Response
  */
-function response($body = '', $status = 200, $headers = array())
-{
+function response($body = '', $status = 200, $headers = array()) {
     return new Response($status, $headers, $body);
 }
 
@@ -77,8 +71,7 @@ function response($body = '', $status = 200, $headers = array())
  * @param int $options
  * @return Response
  */
-function json($data, $options = JSON_UNESCAPED_UNICODE)
-{
+function json($data, $options = JSON_UNESCAPED_UNICODE) {
     return new Response(200, ['Content-Type' => 'application/json'], json_encode($data, $options));
 }
 
@@ -86,8 +79,7 @@ function json($data, $options = JSON_UNESCAPED_UNICODE)
  * @param $xml
  * @return Response
  */
-function xml($xml)
-{
+function xml($xml) {
     if ($xml instanceof SimpleXMLElement) {
         $xml = $xml->asXML();
     }
@@ -99,8 +91,7 @@ function xml($xml)
  * @param string $callback_name
  * @return Response
  */
-function jsonp($data, $callback_name = 'callback')
-{
+function jsonp($data, $callback_name = 'callback') {
     if (!is_scalar($data) && null !== $data) {
         $data = json_encode($data);
     }
@@ -113,8 +104,7 @@ function jsonp($data, $callback_name = 'callback')
  * @param array $headers
  * @return Response
  */
-function redirect($location, $status = 302, $headers = [])
-{
+function redirect($location, $status = 302, $headers = []) {
     $response = new Response($status, ['Location' => $location]);
     if (!empty($headers)) {
         $response->withHeaders($headers);
@@ -128,8 +118,7 @@ function redirect($location, $status = 302, $headers = [])
  * @param null $app
  * @return Response
  */
-function view($template, $vars = [], $app = null)
-{
+function view($template, $vars = [], $app = null) {
     static $handler;
     if (null === $handler) {
         $handler = config('view.handler');
@@ -140,8 +129,7 @@ function view($template, $vars = [], $app = null)
 /**
  * @return Request
  */
-function request()
-{
+function request() {
     return App::request();
 }
 
@@ -150,8 +138,7 @@ function request()
  * @param null $default
  * @return mixed
  */
-function config($key = null, $default = null)
-{
+function config($key = null, $default = null) {
     return Config::get($key, $default);
 }
 
@@ -160,8 +147,7 @@ function config($key = null, $default = null)
  * @param array $parameters
  * @return string
  */
-function route($name, $parameters = [])
-{
+function route($name, $parameters = []) {
     $route = Route::getByName($name);
     if (!$route) {
         return '';
@@ -174,8 +160,7 @@ function route($name, $parameters = [])
  * @param null $default
  * @return mixed
  */
-function session($key = null, $default = null)
-{
+function session($key = null, $default = null) {
     $session = request()->session();
     if (null === $key) {
         return $session;
@@ -194,8 +179,7 @@ function session($key = null, $default = null)
  * @param string|null $locale
  * @return string
  */
-function trans(string $id, array $parameters = [], string $domain = null, string $locale = null)
-{
+function trans(string $id, array $parameters = [], string $domain = null, string $locale = null) {
     $res = Translation::trans($id, $parameters, $domain, $locale);
     return $res === '' ? $id : $res;
 }
@@ -204,8 +188,7 @@ function trans(string $id, array $parameters = [], string $domain = null, string
  * @param null|string $locale
  * @return string
  */
-function locale(string $locale = null)
-{
+function locale(string $locale = null) {
     if (!$locale) {
         return Translation::getLocale();
     }

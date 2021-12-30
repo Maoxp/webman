@@ -1,7 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-$env = parse_ini_file('./.env', true);
+require_once __DIR__ . '/vendor/autoload.php';
 
 
 
+echo BASE_PATH;

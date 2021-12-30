@@ -35,6 +35,7 @@ use Illuminate\Database\Connection;
  * @method static void rollBack($toLevel = null)
  * @method static void commit()
  * @method static Connection beforeExecuting(\Closure $callback)
+ * @method static void listen(\Closure $callback)
  */
 class Db extends Manager
 {

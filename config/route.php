@@ -11,13 +11,12 @@
  * @link      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+declare(strict_types=1);
 
 use app\controller\Index;
+use app\lib\R;
+use app\middleware\AccessControlMiddleware;
 use Webman\Route;
-
-
-
-
 
 
 // 关闭默认路由规格
@@ -25,13 +24,16 @@ Route::disableDefaultRoute();
 
 // 回退路由: 处理不存在的路由And更改默认404
 Route::fallback(static function () {
-    return response('not null');
+    return R::failed('404 not found');
 });
 
-Route::options('[{path:.+}]', static function (){
+// 针对options请求的全局路由
+Route::options('[{path:.+}]', static function () {
     return response('');
-});
+})->middleware([AccessControlMiddleware::class]);
 
-Route::group('/api/index', static function () {
-    Route::post( '/json', [Index::class, 'json']);
+
+
+Route::group('/index', static function () {
+    Route::post('/json', [Index::class, 'json']);
 });

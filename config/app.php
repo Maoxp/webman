@@ -13,6 +13,6 @@
  */
 
 return [
-    'debug' => true,
+    'debug' => \support\Env::get('APP.DEBUG','true'),
     'default_timezone' => 'Asia/Shanghai',
 ];

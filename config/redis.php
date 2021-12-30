@@ -12,11 +12,14 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+use support\Env;
+
 return [
     'default' => [
-        'host'     => '127.0.0.1',
-        'password' => null,
-        'port'     => 6379,
-        'database' => 0,
+//        'scheme' => 'tcp',
+        'host'     => Env::get('REDIS.HOST', '127.0.0.1'),
+        'password' => Env::get('REDIS.PASSWORD', null),
+        'port'     => Env::get('REDIS.PORT', 6379),
+        'database' => Env::get('REDIS.DATABASE', 0),
     ],
 ];
