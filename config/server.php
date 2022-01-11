@@ -24,5 +24,6 @@ return [
     'stdout_file'          => runtime_path() . '/logs/stdout.log',
     'log_file'             => runtime_path() . '/logs/workerman.log',
     'max_request'          => 1000000,
-    'max_package_size'     => 10*1024*1024
+    'max_package_size'     => 10*1024*1024,
+    'reusePort'            => true  // 避免惊群
 ];
