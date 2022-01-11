@@ -22,6 +22,11 @@ use Webman\Route;
 // 关闭默认路由规格
 Route::disableDefaultRoute();
 
+// 处理互联网的健康检查的探测回应
+Route::any('/', static function() {
+    return response();
+});
+
 // 回退路由: 处理不存在的路由And更改默认404
 Route::fallback(static function () {
     return R::failed('404 not found');
