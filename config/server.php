@@ -11,13 +11,13 @@
  * @link      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
+use app\lib\Env;
 return [
-    'listen'               => \support\Env::get('SERVER.LISTEN','http://0.0.0.0:8787'),
+    'listen'               => Env::get('SERVER.LISTEN','http://0.0.0.0:8787'),
     'transport'            => 'tcp',
     'context'              => [],
-    'name'                 => \support\Env::get('SERVER.NAME','webman'),
-    'count'                => \support\Env::get('SERVER.COUNT',cpu_count() * 2),
+    'name'                 => Env::get('SERVER.NAME','webman'),
+    'count'                => Env::get('SERVER.COUNT',cpu_count() * 2),
     'user'                 => '',
     'group'                => '',
     'pid_file'             => runtime_path() . '/webman.pid',

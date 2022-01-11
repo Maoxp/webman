@@ -12,7 +12,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use support\Env;
+use app\lib\Env;
 //return [];
 return [
     'default' => 'mysql',
